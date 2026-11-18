@@ -2727,11 +2727,12 @@ func _react(_action: String, _args):
 		if(GM.pc.hasReachableVagina()):
 			isAnal = false
 		hasPP = GM.pc.hasPenis()
-		var strapon = GlobalRegistry.createItem("StraponCanine")
-		strapon.clothesColor = Color("E096C7")
-		var fluids = strapon.getFluids()
-		fluids.addFluid("CumLube", 526.0)
-		getCharacter("eliza").getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+		if(!getCharacter("eliza").hasPenis()):
+			var strapon = GlobalRegistry.createItem("StraponCanine")
+			strapon.clothesColor = Color("E096C7")
+			var fluids = strapon.getFluids()
+			fluids.addFluid("CumLube", 526.0)
+			getCharacter("eliza").getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
 		var strapon2 = GlobalRegistry.createItem("StraponCanine")
 		strapon2.clothesColor = Color.darkred
 		var fluids2 = strapon2.getFluids()
@@ -2795,7 +2796,10 @@ func _react(_action: String, _args):
 			GM.pc.cummedOnBy("pc")
 		GM.pc.gotThroatFuckedBy("eliza")
 		GM.pc.orgasmFrom("elizaMom")
-		GM.pc.cummedInMouthBy("eliza", FluidSource.Strapon)
+		if(getCharacter("eliza").hasPenis()):
+			GM.pc.cummedInMouthBy("eliza", FluidSource.Penis)
+		else:
+			GM.pc.cummedInMouthBy("eliza", FluidSource.Strapon)
 		if(isAnal):
 			GM.pc.gotAnusFuckedBy("elizaMom")
 			GM.pc.cummedInAnusBy("elizaMom", FluidSource.Strapon)
